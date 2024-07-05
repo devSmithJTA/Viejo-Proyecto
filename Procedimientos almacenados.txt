@@ -1,0 +1,147 @@
+Insertar
+
+USE [BurbujasBlue]
+GO
+/****** Object:  StoredProcedure [dbo].[InsertarEmpleado]    Script Date: 5/07/2024 3:33:09 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[InsertarEmpleado]
+	@IdEmpleado INT,
+    @Nombre VARCHAR(100),
+    @Apellido VARCHAR(100),
+    @FechaNacimiento DATE,
+    @Salario DECIMAL(10, 2),
+    @DepartamentoId INT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+    -- Insert statements for procedure here
+	 INSERT INTO [dbo].[Empleados] (
+	 IdEmpleado,Nombre, Apellido, FechaNacimiento, Salario, DepartamentoId)
+	 VALUES (@IdEmpleado,@Nombre, @Apellido, @FechaNacimiento, @Salario, @DepartamentoId);
+END
+
+
+
+
+
+
+
+
+
+
+
+editar
+
+USE [BurbujasBlue]
+GO
+/****** Object:  StoredProcedure [dbo].[EditarEmpleados]    Script Date: 5/07/2024 3:33:41 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[EditarEmpleados] 
+	@IdEmpleado INT,
+    @Nombre VARCHAR(100),
+    @Apellido VARCHAR(100),
+    @FechaNacimiento DATE,
+    @Salario DECIMAL(10, 2),
+    @DepartamentoId INT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	 UPDATE [dbo].[Empleados] SET
+	  IdEmpleado = @IdEmpleado,Nombre=@Nombre, Apellido=@Apellido, FechaNacimiento=@FechaNacimiento, Salario=@Salario, DepartamentoId=@DepartamentoId
+	 WHERE [IdEmpleado] = @IdEmpleado
+
+	 SELECT @@ROWCOUNT;
+END
+
+
+
+
+
+
+
+
+
+
+
+
+Obtener
+
+USE [BurbujasBlue]
+GO
+/****** Object:  StoredProcedure [dbo].[ObtenerEmpleados]    Script Date: 5/07/2024 3:34:19 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	Procedimiento para obtener todos los empleados
+-- =============================================
+ALTER PROCEDURE [dbo].[ObtenerEmpleados]
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT IdEmpleado, Nombre, Apellido, FechaNacimiento, Salario, DepartamentoId
+    FROM [dbo].[Empleados]
+END
+
+
+
+
+
+
+
+
+
+
+
+
+Eliminar
+
+USE [BurbujasBlue]
+GO
+/****** Object:  StoredProcedure [dbo].[EliminarEmpleado]    Script Date: 5/07/2024 3:34:50 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	Procedimiento para eliminar un empleado
+-- =============================================
+ALTER PROCEDURE [dbo].[EliminarEmpleado]
+    @IdEmpleado INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM [dbo].[Empleados]
+    WHERE IdEmpleado = @IdEmpleado
+
+	SELECT @@ROWCOUNT
+END
